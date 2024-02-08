@@ -1,9 +1,9 @@
-# Ubuntu client image
+# Alpine client image
 
 
 ## What's this
 
-Ubuntu client with below tools for network and sql operation to other docker containers.
+Alpine client with below tools for network and sql operation to other docker containers.
 
 - ping, ipconfig
 - httpie, curl
