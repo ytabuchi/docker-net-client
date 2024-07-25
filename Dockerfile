@@ -12,3 +12,10 @@ RUN apk --no-cache add mysql-client && \
     echo [client]'\n'default-character-set=utf8 >> /etc/my.cnf
 RUN apk --no-cache add postgresql-client
 RUN apk upgrade
+
+RUN addgroup -g 1100 appusers && \
+    adduser -D -h /home/appuser -s /bin/sh -u 1101 -g 1100 appuser
+
+WORKDIR /home/appuser
+
+USER appuser

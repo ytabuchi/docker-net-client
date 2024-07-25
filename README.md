@@ -23,7 +23,7 @@ For example, you can run some commands below in the container:
 ### publish http request to `httpbin.org`
 
 ```sh
-# http httpbin.org/anything X-token:123
+$ http httpbin.org/anything X-token:123
 
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
@@ -57,7 +57,7 @@ Server: gunicorn/19.9.0
 ### publish SQL query
 
 ```sh
-# mysql -h HOSTNAME -D DATABASE -u USER -p
+$ mysql -h HOSTNAME -D DATABASE -u USER -p
 
 mysql> select * from TABLE where id=1;
 +----+---------+---------+
@@ -69,7 +69,7 @@ mysql> select * from TABLE where id=1;
 ```
 
 ```sh
-# psql -h HOSTNAME -d DATABASE -U USER
+$ psql -h HOSTNAME -d DATABASE -U USER
 
 postgres-# select * from TABLE where id=1;
  id | column1 | column2 
