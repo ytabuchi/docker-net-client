@@ -54,3 +54,14 @@ Error: buildx failed with: ERROR: invalid tag "IMAGE": repository name must be l
 
 Multi-platform でビルドするには `platforms: linux/amd64,linux/arm64` を追加。 （[Multi\-platform image \| Docker Docs](https://docs.docker.com/build/ci/github-actions/multi-platform/) を参照。）
 
+
+
+
+## Docker Scout
+
+そのまま Build Cloud でビルドしたイメージをリポジトリにプッシュする。
+
+デフォルトの Policy で SBOM が必要なので、Build Cloud で SBOM を出力するように設定する。
+
+[Attestations \| Docker Docs](https://docs.docker.com/build/ci/github-actions/attestations/#sbom)
+
