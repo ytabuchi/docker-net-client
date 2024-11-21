@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.19
 LABEL Author="@ytabuchi"
 
 # Install curl and httpie
