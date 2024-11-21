@@ -40,5 +40,15 @@ Optional - set cloud builder as default
 - サンプルリポジトリが `master` ブランチだったので記述を変更。
 - `${{ secrets.DOCKERHUB_USERNAME }}` などがあるので、「Settings＞Secres and Variables＞Actions」でリポジトリシークレットを追加。
 
-コミットを試す。
+コミットを試す。→ログインは出来た。
+
+```text
+ERROR: invalid tag "IMAGE": repository name must be lowercase
+Error: buildx failed with: ERROR: invalid tag "IMAGE": repository name must be lowercase
+```
+
+というエラーが出た。
+
+`tags: "IMAGE"` をイメージ名に修正し、再プッシュ
+
 
