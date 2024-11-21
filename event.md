@@ -31,3 +31,14 @@ Optional - set cloud builder as default
 
 ### CI/CD インテグレーション
 
+[Docker Build Cloud](https://app.docker.com/build/accounts/xlsoftpartner/builders/docker-build-cloud-sample/gha) の該当クラウドビルダーでそのクラウドビルダー向けにカスタマイズされたサンプルコードが表示される。
+
+そのコードを元にリポジトリに Actions を追加する。
+
+[docker\-net\-client/\.github/workflows/docker\-build\-cloud\.yml at master · XLsoft\-Corporation/docker\-net\-client](https://github.com/XLsoft-Corporation/docker-net-client/blob/master/.github/workflows/docker-build-cloud.yml)
+
+- サンプルリポジトリが `master` ブランチだったので記述を変更。
+- `${{ secrets.DOCKERHUB_USERNAME }}` などがあるので、「Settings＞Secres and Variables＞Actions」でリポジトリシークレットを追加。
+
+コミットを試す。
+
