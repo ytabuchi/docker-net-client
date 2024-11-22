@@ -1,9 +1,9 @@
-name: ci
+name: build-cloud
 
 on:
   push:
     branches:
-      - "master"
+      - "build-cloud"
 
 jobs:
   docker:
@@ -23,7 +23,7 @@ jobs:
         with:
           version: "lab:latest"
           driver: cloud
-          endpoint: "xlsoftpartner/docker-build-cloud-sample"
+          endpoint: ${{ secrets.BUILDCLOUD_ENDPOINT }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -31,7 +31,7 @@ jobs:
           sbom: true
           platforms: linux/amd64,linux/arm64
           context: .
-          tags: "xlsoftpartner/net-client:alpine3.20"
+          tags: ${{ secrets.DOCKERHUB_IMAGE_TAG }}
           # For pull requests, export results to the build cache.
           # Otherwise, push to a registry.
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
