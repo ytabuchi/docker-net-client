@@ -54,7 +54,7 @@ Error: buildx failed with: ERROR: invalid tag "IMAGE": repository name must be l
 
 Multi-platform でビルドするには `platforms: linux/amd64,linux/arm64` を追加。 （[Multi\-platform image \| Docker Docs](https://docs.docker.com/build/ci/github-actions/multi-platform/) を参照。）
 
-
+`build-cloud` ブランチに PUSH すると、Docker Hub の `xlsoftpartner/net-client:tab` にプッシュしてくれる。
 
 
 ## Docker Scout
