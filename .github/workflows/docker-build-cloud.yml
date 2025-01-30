@@ -1,9 +1,6 @@
 name: docker-build-cloud
 
 on:
-  push:
-    branches:
-      - "master"
   workflow_dispatch:
 
 jobs:
