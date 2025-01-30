@@ -21,9 +21,6 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    
-    - name: Set tag name
-      run: echo "::set-env name=IMAGE_TAG::${{ vars.DOCKERHUB_IMAGE_NAME }}:$(date +%Y%m%d)"
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${{ vars.DOCKERHUB_IMAGE_NAME }}:$(date +%Y%m%d)
