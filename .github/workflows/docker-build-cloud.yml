@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "build-cloud"
+  workflow_dispatch:
 
 jobs:
   build-cloud:
