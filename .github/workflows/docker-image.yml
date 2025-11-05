@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image Build and Push
 
 on:
   # push:
@@ -32,7 +32,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
-        context: .
         platforms: linux/amd64,linux/arm64
         sbom: true
         push: true
