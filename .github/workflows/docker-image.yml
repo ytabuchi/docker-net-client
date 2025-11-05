@@ -1,10 +1,10 @@
 name: Docker Image Build and Push
 
 on:
-  # push:
-  #   branches: [ "master" ]
-  # pull_request:
-  #   branches: [ "master" ]
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 0'  # 毎週日曜日の午前0時（UTC）
