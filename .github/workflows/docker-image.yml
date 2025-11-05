@@ -26,10 +26,10 @@ jobs:
       run: docker buildx build --file Dockerfile \\
         --platform linux/amd64,linux/arm64 \\
         --sbom=true \\
-        --tag ${{ vars.DOCKERHUB_IMAGE_NAME }}:$(date +%Y%m%d) .
+        --tag ytabuchi/net-client:$(date +%Y%m%d) .
       
     - name: Push the Docker image
-      run: docker push ${{ vars.DOCKERHUB_IMAGE_NAME }}:$(date +%Y%m%d)
+      run: docker push ytabuchi/net-client:$(date +%Y%m%d)
 
     - name: Push the Docker image with latest tag
-      run: docker tag ${{ vars.DOCKERHUB_IMAGE_NAME }}:$(date +%Y%m%d) ${{ vars.DOCKERHUB_IMAGE_NAME }}:latest && docker push ${{ vars.DOCKERHUB_IMAGE_NAME }}:latest
+      run: docker tag ytabuchi/net-client:$(date +%Y%m%d) ytabuchi/net-client:latest && docker push ytabuchi/net-client:latest
