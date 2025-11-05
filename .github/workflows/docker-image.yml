@@ -1,10 +1,10 @@
 name: Docker Image Build and Push
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  # push:
+  #   branches: [ "master" ]
+  # pull_request:
+  #   branches: [ "master" ]
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 0'  # 毎週日曜日の午前0時（UTC）
@@ -34,7 +34,8 @@ jobs:
       id: baseimage
       run: |
         FROM_LINE=$(grep -m 1 '^FROM' Dockerfile)
-        echo "$FROM_LINE" | awk '{print $2}' | sed 's/://' >> $GITHUB_OUTPUT
+        IMAGE=$(echo "$FROM_LINE" | awk '{print $2}' | sed 's/://')
+        echo "image=$IMAGE" >> $GITHUB_OUTPUT
 
     - name: Get date
       id: date
@@ -48,5 +49,5 @@ jobs:
         sbom: true
         push: true
         tags: |
-          ${{ vars.DOCKERHUB_IMAGE_NAME }}:${{ steps.baseimage.outputs.baseimage }}_${{ steps.date.outputs.date }}
+          ${{ vars.DOCKERHUB_IMAGE_NAME }}:${{ steps.baseimage.outputs.image }}_${{ steps.date.outputs.date }}
           ${{ vars.DOCKERHUB_IMAGE_NAME }}:latest
