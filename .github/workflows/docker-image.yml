@@ -30,6 +30,12 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
+    - name: Extract and format base image
+      id: baseimage
+      run: |
+        FROM_LINE=$(grep -m 1 '^FROM' Dockerfile)
+        IMAGE=$(echo "$FROM_LINE" | awk '{print $2}' | sed 's/://')
+
     - name: Get date
       id: date
       run: echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
@@ -42,5 +48,5 @@ jobs:
         sbom: true
         push: true
         tags: |
-          ${{ vars.DOCKERHUB_IMAGE_NAME }}:${{ vars.DOCKERHUB_IMAGE_TAG }}_${{ steps.date.outputs.date }}
+          ${{ vars.DOCKERHUB_IMAGE_NAME }}:${{ steps.baseimage.outputs.image }}_${{ steps.date.outputs.date }}
           ${{ vars.DOCKERHUB_IMAGE_NAME }}:latest
