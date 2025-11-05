@@ -42,5 +42,5 @@ jobs:
         sbom: true
         push: true
         tags: |
-          ${{ secrets.DOCKERHUB_IMAGE_NAME }}:${{ steps.date.outputs.date }}
-          ${{ secrets.DOCKERHUB_IMAGE_NAME }}:latest
+          ${{ vars.DOCKERHUB_IMAGE_NAME }}:${{ vars.DOCKERHUB_IMAGE_TAG }}_${{ steps.date.outputs.date }}
+          ${{ vars.DOCKERHUB_IMAGE_NAME }}:latest
