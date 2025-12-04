@@ -3,7 +3,7 @@ LABEL Author="@ytabuchi"
 
 # Install curl and httpie
 RUN apk update && \
-    apk --no-cache add curl httpie
+    apk --no-cache add curl
 
 # Install MySQL and PostreSQL client
 ENV LANG=C.UTF-8
