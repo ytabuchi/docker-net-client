@@ -1,18 +1,53 @@
-name: Docker Image CI
+name: Docker Image Build and Push
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "master" ]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'  # 毎週日曜日の午前0時（UTC）
 
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ytabuchi/net-client:latest
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Extract and format base image
+      id: baseimage
+      run: |
+        FROM_LINE=$(grep -m 1 '^FROM' Dockerfile)
+        IMAGE=$(echo "$FROM_LINE" | awk '{print $2}' | sed 's/://')
+        echo "image=$IMAGE" >> $GITHUB_OUTPUT
+
+    - name: Get date
+      id: date
+      run: echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64
+        sbom: true
+        push: true
+        tags: |
+          ${{ vars.DOCKERHUB_IMAGE_NAME }}:${{ steps.baseimage.outputs.image }}_${{ steps.date.outputs.date }}
+          ${{ vars.DOCKERHUB_IMAGE_NAME }}:latest
